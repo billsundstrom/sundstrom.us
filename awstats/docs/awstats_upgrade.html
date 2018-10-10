@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta name="description" content="AWStats Documentation - Upgrade setup">
+<meta name="keywords" content="awstats, awstat, udpate, upgrade">
+<meta name="robots" content="index,follow">
+<meta name="title" content="AWStats Documentation - Upgrade setup">
+<title>AWStats Documentation - Upgrade setup</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+<!-- $Revision: 1.12 $ - $Author: eldy $ - $Date: 2005/02/18 19:39:59 $ -->
+</head>
+
+<body topmargin=10 leftmargin=5>
+
+
+<table style="font: 10pt arial,helvetica,verdana" cellpadding=0 cellspacing=0 border=0 bgcolor=#FFFFFF width=100%>
+
+<!-- Large -->
+<tr style="font: 10pt arial,helvetica,verdana">
+<td bgcolor=#9999cc align=center><a href="/"><img src="images/awstats_logo4.png" border=0></a></td>
+<td bgcolor=#9999cc align=center>
+<br>
+<font style="font: 16pt arial,helvetica,sans-serif" color=#EEEEFF><b>AWStats logfile analyzer 6.4 Documentation</b></font><br>
+<br>
+</td>
+<td bgcolor=#9999cc align=center>
+&nbsp;
+</td>
+</tr>
+
+</table>
+
+<br><br><H1 style="font: 26px arial,helvetica,sans-serif">Upgrading AWStats to a new version</H1>
+
+To upgrade AWStats from an old version to a new one, all you have to do is:<br>
+<br>
+* <b>Check your Perl version is at least 5.005_03 (or higher)</b>. For this you can run <i>perl -v</i> command.<br>
+<br>
+* <b>Replace AWStats runtime files</b> by new ones. For this you can:<br>
+&nbsp; &nbsp; &nbsp; &nbsp;- decompress new AWStats zip or tgz package to old install directory (AWStats
+old runtime files are replaced by new ones. This works whatever is the old and new version, 3.x, 4.x, 5.x, 6.x).<br>
+&nbsp; &nbsp; &nbsp; &nbsp;- or just run your OS package tool (rpm, apt, or just .exe for windows).<br>
+<br>
+* <b>Your setup files should not be lost</b> as AWStats default distribution should not overwite
+config file (it provides only one config file example called <i>awstats.model.conf</i>). However
+some packages are not official, so you can save and restore AWStats config files (awstats*.conf)
+if you prefer.<br>
+Sometimes, there is new parameter supported by the new version. Since those parameters are not 
+present in old config files, AWStats will use default values for them, to work as it did when
+those parameters did not exist, so there is no need to add them, except if you want to use
+differently the new feature.<br>
+<br>
+
+<u>Note 0:</u> Perl 5.005_03 or higher is a requirement to use AWStats 6.0 or higher.
+<br>
+<u>Note 1:</u> When migrating to 6.x series, if you use the ExtraSections feature,
+  you must check that the parameter(s) ExtraSectionConditionX use a full
+  REGEX syntax (with 5.x series, this parameter could contain simple string
+  values). If not, feature will be broken.
+<br>
+<u>Note 2:</u> When migrating to 6.x series, if you use the Misc feature, you must
+  check that your ShowMiscStats parameter is set to "ajdfrqwp", if you want
+  to have all miscellanous info reported (you must also have added the
+  awstats_misc_tracker.js script in your home page as described in
+  MiscTrackerUrl parameter description). Otherwise the new default value "a"
+  will be used (only the "Add to favourites" will be reported).
+<br>
+<u>Note 3:</u> In 6.x series, MaxLengthOfURL parameter has been renamed into MaxLengthOfShownURL
+<br>
+<u>Note 4:</u> When migrating to 6.x series, to enable the new worm detection, you must add parameter
+  LevelForWormsDetection=2 in your config file.
+<br>
+<u>Note 5:</u> When migrating to 6.x series, if you used the urlalias or userinfo plugin, you must move the urlalias.*.txt
+or userinfo.*.txt file from Plugins directory to DirData directory.
+<br>
+
+<br>
+* <b>Your old analyzed data should not be lost</b> since your 'history files' are saved in the
+directory defined in DirData parameter in your AWStats config file and 'history files' format is
+compatible with each new version of AWStats since 5.x series. If you upgrade from 3.x or 4.x
+series to 5.x, 6.x or higher, AWStats will still be able to 'read' your old history files but
+a warning will appear to ask you to run the 'migrate' process on your old data files.
+Just run the command that will appear in warning message.
+This warning will appear only after upgrade from 3.x or 4.x series to a 5.x, 6.x or higher
+version and only if 'migrate' is necessary.<br>
+<br>
+
+<hr>
+
+<script language=javascript>
+	var date='$Date: 2005/02/18 19:39:59 $';
+	document.writeln("Last revision: "+date);
+</script>
+
+</body>
+</html>

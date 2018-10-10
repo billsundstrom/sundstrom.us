@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-W3C//DTD XHTML L.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head><title>a GAME of concentration</title>
+   <style type="text/css">
+      a {text-decoration:none}
+      h1 {color:darkblue; background-color:white}
+      div {text-align:center; position:relative; width:702px; }
+      a:hover {color:green; background-color:white; text-decoration:underline}
+      tr {text-align:center}
+      img {height:75}
+   </style>
+
+   <script type = "text/javascript">
+      var clickNum;
+      var totalClicks;
+      var pos0;
+      var pos1;
+      var gameOver;
+      var useGameClock;
+      var secondsToPlay;
+      var timer;
+      var tempInt;
+      var unCovered;
+
+      var gameBoard = new Array( 4 );
+      var pic = ["B.gif","C.gif","F.gif","I.gif","in.gif","J.gif","M.gif","out.gif"];
+      var im = "<img src='images/"
+
+
+   function startNewGame() {
+      results.innerText = ' ';
+      gameOver = false;
+      clickNum = -1;
+      totalClicks = 0;
+      pos0 = [-1, -1];
+      pos1 = [-1, -1];
+      for ( var i = 0; i < 4; i++ ) {
+         gameBoard[i] = [-1, -1, -1, -1];
+	 for (var j = 0; j < 4; j++) cover(i,j);
+      }
+      for ( var pic1 = 0; pic1 < 8; pic1++)
+      for ( var pic2 = 0; pic2 < 2; pic2++) {
+         do {
+            var i = Math.floor(Math.random()*4);
+            var j = Math.floor(Math.random()*4);
+         }  while (gameBoard[i][j] != -1);
+         gameBoard[i][j] = pic1;
+      }
+      showClicks.innerText = 'Clicks: 0';
+      if (useClock[0].checked) {
+         tempInt = parseInt(ClockBox.value);
+         if (tempInt > 0) {
+	    secondsToPlay = tempInt;
+            clock();
+	 }
+      }
+      unCovered = 0;
+   }
+
+   function setCell( i, j, thisPic ) {
+      if ( i == 0 ) {
+         if (j == 0 ) cell_00.innerHTML = thisPic;
+         else if (j == 1 ) cell_01.innerHTML = thisPic;
+         else if (j == 2 ) cell_02.innerHTML = thisPic;
+         else if (j == 3 ) cell_03.innerHTML = thisPic;
+      }
+      else if ( i == 1 ) {
+         if (j == 0 ) cell_10.innerHTML = thisPic;
+         else if (j == 1 ) cell_11.innerHTML = thisPic;
+         else if (j == 2 ) cell_12.innerHTML = thisPic;
+         else if (j == 3 ) cell_13.innerHTML = thisPic;
+      }
+      else if ( i == 2 ) {
+         if (j == 0 ) cell_20.innerHTML = thisPic;
+         else if (j == 1 ) cell_21.innerHTML = thisPic;
+         else if (j == 2 ) cell_22.innerHTML = thisPic;
+         else if (j == 3 ) cell_23.innerHTML = thisPic;
+      }
+      else if ( i == 3 ) {
+         if (j == 0 ) cell_30.innerHTML = thisPic;
+         else if (j == 1 ) cell_31.innerHTML = thisPic;
+         else if (j == 2 ) cell_32.innerHTML = thisPic;
+         else if (j == 3 ) cell_33.innerHTML = thisPic;
+      }
+   }
+
+   function displayCell( i, j ) {
+      var cellPic = im +pic[gameBoard[i][j]]+ "' />";
+      setCell( i, j, cellPic );
+   }
+
+   function cover(i, j) {
+      var cellCover = "<img src='images/cover.gif' />";
+      setCell( i, j, cellCover );
+      unCovered = unCovered - 1;
+    }
+
+   function tableClick( i, j )  {
+
+      if ((!gameOver) && (unCovered == 0)) {
+         if (gameBoard[i][j] >= 0) {
+            clickNum++;
+	    totalClicks++;
+	    showClicks.innerText = 'Clicks: ' + totalClicks;
+            displayCell( i, j );
+            if (clickNum == 0) pos0 = [i, j];
+            else {
+               clickNum = -1;
+               if ((pos0[0] == i) && (pos0[1] == j)) cover( i, j);
+	       else {
+	          pos1 = [i, j]
+                  if (gameBoard[pos0[0]][pos0[1]] == gameBoard[i][j]) {
+                     gameBoard[pos0[0]][pos0[1]] = -1;
+                     gameBoard[i][j] = -1;
+		     var isGameOver = 0;
+		     for (var i = 0; i < 4; i++)
+		        for (var j = 0; j < 4; j++)
+		           isGameOver += gameBoard[i][j];
+		     if (isGameOver == -16) {
+		        gameOver = true;
+		        results.innerText = "Congratatulation! You Won!";
+			alert("You Won!");
+		     }
+                  } else {
+                     unCovered = 2;
+                     window.setTimeout("cover(pos0[0],pos0[1])",700);
+                     window.setTimeout("cover(pos1[0],pos1[1])",700);
+		  }
+               }
+	    }
+         }
+      }
+   }
+
+   function counter() {
+      secondsToPlay--;
+      ClockBox.innerText = secondsToPlay;
+      if (secondsToPlay <1 ) {
+         gameOver = true;
+         results.innerText = "Sorry, Out of Time. Game Over!";
+      }
+      if (gameOver) window.clearInterval(timer);
+   }
+
+   function clock() {
+      timer = window.setInterval("counter()",1000);
+   }
+
+   function getHelp() {
+   	var gameHelp = "Play:\n" +
+	   "Select an uncovered box to show its contents.\n" +
+	   "Select another. If they match they will remain.\n" +
+	   "To win continue selecting until all boxes are displayed.\n" +
+	   "Clock:\n" +
+	   "The game will time your play in seconds,\n" +
+	   "if you type any number larger 0 into the clock input,\n" +
+	   "and select YES to use the the clock.";
+	alert (gameHelp);
+   }
+
+   </script>
+
+</head>
+<body>
+	<div>
+		<h1>A Game of Concentration</h1>
+		<h2><u><i>Enjoy !</i>&nbsp and &nbsp Have <i>Fun !</i></u></h2>
+
+		<table border = '1' align = 'center'
+		  summary = 'This table is Handles input.'>
+			<tr>
+				<td><input name = 'startButton' type = 'button' value = 'Start New Game' onclick = 'startNewGame()' /></td>
+				<td><input name = 'helpButton' type = 'button' value = 'Help' onclick = 'getHelp()' /></td>
+				<td id='showClicks'>Clicks: 0</td>
+			</tr>
+			<tr>
+				<td><label>Use Game Clock<br /><label>Yes<input name = 'useClock' type = 'radio' value = 'Yes' checked = 'checked' />
+					</label><label>No <input name = 'useClock' type = 'radio' value = 'No' /></label></td>
+				<td><label>Game Clock<br /><input id = 'ClockBox' type = 'text' size = '3' value = '60' /></label></td>
+				<td>Enter seconds<br />to play.</td>
+			</tr>
+		</table>
+		<h1 id='results'>&nbsp</h1>
+		<table border = '1' width = '400px' align = 'center'
+		  summary = 'This table is the game board.'>
+
+		  <tr>
+			<td id='cell_00' onclick = 'tableClick( 0, 0 )'><img src='images/cover.gif' /></td>
+			<td id='cell_01' onclick = 'tableClick( 0, 1 )'><img src='images/cover.gif' /></td>
+			<td id='cell_02' onclick = 'tableClick( 0, 2 )'><img src='images/cover.gif' /></td>
+			<td id='cell_03' onclick = 'tableClick( 0, 3 )'><img src='images/cover.gif' /></td>
+		  </tr>
+		  <tr>
+			<td id='cell_10' onclick = 'tableClick( 1, 0 )'><img src='images/cover.gif' /></td>
+			<td id='cell_11' onclick = 'tableClick( 1, 1 )'><img src='images/cover.gif' /></td>
+			<td id='cell_12' onclick = 'tableClick( 1, 2 )'><img src='images/cover.gif' /></td>
+			<td id='cell_13' onclick = 'tableClick( 1, 3 )'><img src='images/cover.gif' /></td>
+		  </tr>
+		  <tr>
+			<td id='cell_20' onclick = 'tableClick( 2, 0 )'><img src='images/cover.gif' /></td>
+			<td id='cell_21' onclick = 'tableClick( 2, 1 )'><img src='images/cover.gif' /></td>
+			<td id='cell_22' onclick = 'tableClick( 2, 2 )'><img src='images/cover.gif' /></td>
+			<td id='cell_23' onclick = 'tableClick( 2, 3 )'><img src='images/cover.gif' /></td>
+		  </tr>
+		  <tr>
+			<td id='cell_30' onclick = 'tableClick( 3, 0 )'><img src='images/cover.gif' /></td>
+			<td id='cell_31' onclick = 'tableClick( 3, 1 )'><img src='images/cover.gif' /></td>
+			<td id='cell_32' onclick = 'tableClick( 3, 2 )'><img src='images/cover.gif' /></td>
+			<td id='cell_33' onclick = 'tableClick( 3, 3 )'><img src='images/cover.gif' /></td>
+		  </tr>
+		</table>
+		<p></p>
+	</div>
+	</body>
+</html>

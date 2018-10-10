@@ -1,0 +1,13 @@
+body	{font-family     : arial, sans-serif;
+	 background-color: #CCFFFF; }
+h3	{color       : #00008B;
+         font-variant: small-caps; 
+         font-size   : 16pt  ;}
+img	{border      : 0px ;    }
+.super	{font-size   : 0.65em;
+     	 position    : relative;
+   	 top         : -1.5ex;  }
+.indent	{position    : relative;
+      	 right       : -2ex;    }
+.indent2 {position   : relative;
+     	  right      : -4ex     }

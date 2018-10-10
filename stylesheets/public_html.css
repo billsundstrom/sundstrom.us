@@ -1,0 +1,23 @@
+body	{font-family     : arial, sans-serif;
+         background-image: url(http://sundstrom.us/backgrounds/wallpaper.bmp) ; }
+h1 	{text-decoration : underline;
+	 color           : #00008B;
+	 font-size       : 16pt }
+h2 	{color           : #00008B;
+ 	 font-size       : 14pt }
+h3 	{color           : #00008B;
+	 font-size       : 12pt;}
+
+li    {font-size       : 12pt }
+a     {text-decoration : none}
+a:hover {color         : green; 
+         background-color: white; 
+         text-decoration : underline}
+
+.big    {font-size : 1.33em; }
+.smaller{font-size : 0.75em; }
+.super	{font-size : 0.65em;
+	 position  : relative;
+	 top       : -1.5ex;      }
+.indent {position  : relative;
+ 	 right     : -2ex;      }

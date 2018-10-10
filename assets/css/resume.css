@@ -1,0 +1,30 @@
+body	{font-family     : arial, sans-serif;
+         background-image: url(http://sundstrom.us/assets/backgrounds/wp2.gif) ; }
+h3	{text-decoration : none; }
+h2	{color           : #00008B;
+	 text-decoration : none;}
+h1	{text-decoration : none; }
+p	{font-size       : 12pt; }
+ul      {margin-top : -10px ; }
+li	{font-size       : 12pt; }
+strong	{font-size       : 1.25em;  }
+
+#contents { width : 702px ; 
+			margin: 4em   ; }
+
+#contents .right-panel {float: right;   }
+
+#contents .right-panel.image {
+  border: 0px solid #000;
+  margin-left : 10px}
+  
+.smaller {font-size       : 0.75em }
+.super   {font-size       : 0.65em;
+ 	  position        : relative;
+ 	  top             : -1.5ex      }
+.indent  {position        : relative;
+ 	  right           : -2ex      }
+.indent2 {position        : relative;
+ 	   right           : -4ex      }
+.indent3 {position        : relative;
+ 	  right           : -6ex      }

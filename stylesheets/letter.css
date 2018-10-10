@@ -1,0 +1,17 @@
+body {font-family     : cursive, Lucida Handwriting, Brush Script MT;
+      background-image: url(http://sundstrom.us/stylesheets/ltrbk.bmp) ; 
+      padding: 10px;
+      margin: 10px;
+      width: 93%;       }
+ h4  {font-family : BrushScrD, Lucida Handwriting, cursive; 
+      font-size   : 20pt;
+      margin-left : 50pt;}
+ div {float: right; 
+      margin      : 72px 72px ;
+      padding     : 16pt;
+      text-align  : right; 
+      border-style: solid;
+      color       : #APA9A9 ;
+      background-color: #F08080  ;
+ }
+

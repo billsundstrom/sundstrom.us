@@ -1,0 +1,41 @@
+body {
+  font-family: comic-sans-ms, cursive, arial, sans-serf;
+  background-image: url(http://sundstrom.us/backgrounds/ltrbk.bmp) ; 
+}
+
+div{ 
+   margin-left : 3em;}
+
+h4 {
+  text-decoration: none;
+  font-size: 12pt;}
+
+h3 {
+  text-decoration: underline;
+  font-size: 13pt;}
+
+h2 {
+  color: #2F0D6E;
+  font-size: 16pt }
+  
+h1 {
+  color: #2F0D6E;
+  font-variant:  small-caps;
+  font-size: 24pt }
+  
+p {
+  font-size : 11pt; }
+  
+ul {  
+  margin-top : -10px ;  }
+
+li { 
+  font-size : 11pt; }
+
+a {
+  text-decoration : none;}
+
+a:hover {
+  color : #2F0D6E;
+  background-color: #E7F6FB ; 
+  text-decoration : underline;}
